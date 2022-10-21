@@ -14,6 +14,7 @@ interface BlogContextType {
     company: string
   }
   posts: PostsType[]
+  searchPost: (post?: string) => void
 }
 
 export const BlogContext = createContext({} as BlogContextType)
@@ -36,6 +37,14 @@ export function BlogContextProvider({ children }: BlogContextProviderProps) {
     company: '',
   })
 
+  async function searchPost(post?: string) {
+    const response = await api.get(
+      `https://api.github.com/search/issues?q=${post}repo:guiibraun/github-blog`,
+    )
+    console.log(response.data.items)
+    setPosts(response.data.items)
+  }
+
   async function fetchIssues() {
     const response = await api.get('/repos/guiibraun/github-blog/issues')
     setPosts(response.data)
@@ -52,7 +61,7 @@ export function BlogContextProvider({ children }: BlogContextProviderProps) {
   }, [])
 
   return (
-    <BlogContext.Provider value={{ profile, posts }}>
+    <BlogContext.Provider value={{ profile, posts, searchPost }}>
       {children}
     </BlogContext.Provider>
   )

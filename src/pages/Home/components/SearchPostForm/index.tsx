@@ -1,9 +1,25 @@
 import { useContext } from 'react'
+import { useForm } from 'react-hook-form'
 import { BlogContext } from '../../../../contexts/blogContexts'
 import { LabelsForm, SearchPostFormContainer } from './styles'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const searchPostValidationSchema = zod.object({
+  post: zod.string(),
+})
+
+type DataProps = zod.infer<typeof searchPostValidationSchema>
 
 export function SearchPostForm() {
-  const { posts } = useContext(BlogContext)
+  const { posts, searchPost } = useContext(BlogContext)
+  const { register, handleSubmit } = useForm<DataProps>({
+    resolver: zodResolver(searchPostValidationSchema),
+  })
+
+  async function handleSearchInput(dataInfo: DataProps) {
+    await searchPost(dataInfo.post)
+  }
 
   return (
     <SearchPostFormContainer>
@@ -17,8 +33,13 @@ export function SearchPostForm() {
           )}
         </span>
       </LabelsForm>
-      <form>
-        <input type="text" placeholder="Buscar conteúdo" />
+      <form onSubmit={handleSubmit(handleSearchInput)}>
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          {...register('post')}
+        />
+        <button type="submit">Enviar</button>
       </form>
     </SearchPostFormContainer>
   )
