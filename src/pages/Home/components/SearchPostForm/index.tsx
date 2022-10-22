@@ -17,8 +17,8 @@ export function SearchPostForm() {
     resolver: zodResolver(searchPostValidationSchema),
   })
 
-  async function handleSearchInput(dataInfo: DataProps) {
-    await searchPost(dataInfo.post)
+  function handleSearchInput(dataInfo: DataProps) {
+    searchPost(dataInfo.post)
   }
 
   return (
@@ -39,7 +39,6 @@ export function SearchPostForm() {
           placeholder="Buscar conteúdo"
           {...register('post')}
         />
-        <button type="submit">Enviar</button>
       </form>
     </SearchPostFormContainer>
   )

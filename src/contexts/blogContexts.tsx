@@ -36,12 +36,22 @@ export function BlogContextProvider({ children }: BlogContextProviderProps) {
     html_url: '',
     company: '',
   })
-
+  /* 
   async function searchPost(post?: string) {
     const response = await api.get(
       `https://api.github.com/search/issues?q=${post}repo:guiibraun/github-blog`,
     )
     console.log(response.data.items)
+    setPosts(response.data.items)
+  } */
+
+  async function searchPost(post?: string) {
+    const response = await api.get(`https://api.github.com/search/issues`, {
+      params: {
+        q: `${post}repo:guiibraun/github-blog`,
+      },
+    })
+    console.log(response)
     setPosts(response.data.items)
   }
 
