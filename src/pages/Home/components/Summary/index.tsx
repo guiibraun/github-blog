@@ -9,18 +9,24 @@ export function Summary() {
 
   return (
     <SummaryContainer>
-      {posts.map((post) => (
-        <Link to={`/post/${post.number}`} key={post.number}>
-          <PostCard>
-            <TitleAndTime>
-              <h2>{post.title}</h2>
-              <span>{dateFormatter(post.created_at)}</span>
-            </TitleAndTime>
+      {posts.length > 0 ? (
+        <>
+          {posts.map((post) => (
+            <Link to={`/post/${post.number}`} key={post.number}>
+              <PostCard>
+                <TitleAndTime>
+                  <h2>{post.title}</h2>
+                  <span>{dateFormatter(post.created_at)}</span>
+                </TitleAndTime>
 
-            <p>{post.body.slice(0, 120)}...</p>
-          </PostCard>
-        </Link>
-      ))}
+                <p>{post.body.slice(0, 120)}...</p>
+              </PostCard>
+            </Link>
+          ))}
+        </>
+      ) : (
+        <h2>Nenhum post encontrado</h2>
+      )}
     </SummaryContainer>
   )
 }

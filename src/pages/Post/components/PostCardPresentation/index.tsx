@@ -13,7 +13,8 @@ import {
   SocialGithubInfos,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { dateFormatter } from '../../../utils/formatter'
+import { dateFormatter } from '../../../../utils/formatter'
+import { useContext } from 'react'
 
 interface CardPresentationProps {
   title: string

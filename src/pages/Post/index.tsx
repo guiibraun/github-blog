@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { api } from '../../lib/axios'
-import { CardPresentation } from './PostCardPresentation'
-import { PostContent } from './PostContent'
+import { CardPresentation } from './components/PostCardPresentation'
+import { PostComments } from './components/PostComments'
+import { PostContent } from './components/PostContent'
 import { PostContainer } from './styles'
 
 export interface PostType {
@@ -14,6 +15,7 @@ export interface PostType {
   comments: number
   created_at: string
   html_url: string
+  comments_url: string
 }
 
 export function Post() {
@@ -26,6 +28,7 @@ export function Post() {
     body: '',
     comments: 0,
     created_at: new Date().toISOString(),
+    comments_url: '',
   })
   const params = useParams()
 
@@ -49,6 +52,7 @@ export function Post() {
         comments={singlePost.comments}
       />
       <PostContent body={singlePost.body} />
+      <PostComments commentsId={params.id} />
     </PostContainer>
   )
 }
