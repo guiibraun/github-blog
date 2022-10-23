@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { api } from '../../../../lib/axios'
-import { CommentForm, Comments, PostCommentsContainer } from './styles'
+import {
+  CommentForm,
+  CommentInfo,
+  Comments,
+  InfoAndTime,
+  PostCommentsContainer,
+} from './styles'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { dateFormatter } from '../../../../utils/formatter'
 
 interface PostCommentsProps {
   commentsId?: string
@@ -17,6 +24,7 @@ interface CommentsType {
     login: string
     avatar_url: string
   }
+  created_at: string
 }
 
 const commentValidationSchema = zod.object({
@@ -70,7 +78,13 @@ export function PostComments({ commentsId }: PostCommentsProps) {
       {comments.map((comment) => (
         <Comments key={comment.id}>
           <img src={comment.user.avatar_url} alt="" />
-          <div>{comment.body}</div>
+          <CommentInfo>
+            <InfoAndTime>
+              <h6>{comment.user.login}</h6>
+              <span>{dateFormatter(comment.created_at)}</span>
+            </InfoAndTime>
+            <p>{comment.body}</p>
+          </CommentInfo>
         </Comments>
       ))}
     </PostCommentsContainer>
