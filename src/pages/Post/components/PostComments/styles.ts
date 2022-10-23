@@ -66,6 +66,19 @@ export const InfoAndTime = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    h6 {
+      font-size: 1.2rem;
+      line-height: 1.1;
+    }
+  }
 
   h6 {
     font-size: 1.5rem;

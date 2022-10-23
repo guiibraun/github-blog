@@ -6,10 +6,14 @@ export const PostCardPresentationContainer = styled.div`
   margin-top: -5rem;
   box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-
+  overflow: hidden;
   display: flex;
 
   gap: 2rem;
+
+  @media (max-width: 767px) {
+    padding: 1rem;
+  }
 `
 export const CardInfos = styled.div`
   display: flex;
@@ -26,11 +30,25 @@ export const CardInfos = styled.div`
 
     color: ${(props) => props.theme['base-title']};
   }
+
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
 `
 
 export const NameAndLink = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 1rem;
+  }
 
   a,
   button {

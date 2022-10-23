@@ -35,7 +35,7 @@ type DataProps = zod.infer<typeof commentValidationSchema>
 
 export function PostComments({ commentsId }: PostCommentsProps) {
   const [comments, setComments] = useState<CommentsType[]>([])
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     resolver: zodResolver(commentValidationSchema),
     defaultValues: {
       comment: '',
@@ -66,6 +66,7 @@ export function PostComments({ commentsId }: PostCommentsProps) {
     )
     console.log(response)
     setComments((prevState) => [response.data, ...prevState])
+    reset()
   }
 
   return (

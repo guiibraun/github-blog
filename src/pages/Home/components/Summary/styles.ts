@@ -9,6 +9,10 @@ export const SummaryContainer = styled.div`
   a {
     text-decoration: none;
   }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const PostCard = styled.div`

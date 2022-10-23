@@ -16,6 +16,10 @@ export const CardPresentationContainer = styled.div`
     border-radius: 10px;
     max-height: 9.25rem;
   }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
 `
 export const CardInfos = styled.div`
   display: flex;
